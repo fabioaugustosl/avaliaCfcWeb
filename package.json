@@ -1,0 +1,33 @@
+{
+  "name": "avaliaVirtz",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "angular-chart.js": "^1.1.1",
+    "bcrypt": "^1.0.2",
+    "bootstrap": "^4.0.0",
+    "express": "^4.16.2",
+    "express-session": "^1.15.3",
+    "jquery": "3.3.1"
+  },
+  "devDependencies": {
+    "browser-sync": "2.23.6",
+    "bluebird": "~3.4.6",
+    "gulp": "^3.9.1",
+    "gulp-inject": "^4.1.0",
+    "gulp-jshint": "^2.1.0",
+    "gulp-nodemon": "~2.1.0",
+    "jshint": "^2.9.5",
+    "jshint-stylish": "~2.2.1",
+    "wiredep": "^4.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "BSD-2-Clause"
+}

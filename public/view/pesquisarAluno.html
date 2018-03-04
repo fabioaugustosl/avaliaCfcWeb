@@ -1,0 +1,106 @@
+ <div class="page-content" ng-controller="AlunoPesquisarController as alunoCtrl" style=" padding-top:20px; padding-bottom:20px;">
+
+
+    <div class="row">
+        <div class="alert alert-danger" style="margin: 10px;" role="alert" ng-show="alunoCtrl.msgErro">{{alunoCtrl.msgErro}}</div>
+    </div>
+
+    <div class="row">
+        <div class="progress" ng-show="alunoCtrl.processando">
+          <div class="progress-bar progress-bar-striped active" role="progressbar"  aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+        </div>
+    </div>
+
+
+    
+    <div class="content" ng-show="alunoCtrl.aluno">
+        <div class="row">
+            <div class="col-md-6">
+                <label class="control-label">Insira o código do aluno: </label>
+                <div class="input-icon right">
+                    <input id="inputCodigo" type="text" placeholder="" class="form-control" ng-model="alunoCtrl.codigoAlunoInformado" />
+                </div>
+            </div>
+             <div class="col-md-6">
+                <a class="btn btn-primary btn-lg" href="#" ng-click="alunoCtrl.buscarAluno()">Pesquisar</a>
+            </div>
+
+
+        </div>
+
+        <br />
+
+        <div class="row" ng-show="alunoCtrl.aluno">
+            <div class="col-md-6">
+                <label class="control-label">Nome: </label>
+                <p >{{alunoCtrl.aluno.nome}} </p>
+            </div>
+
+            <div class="col-md-6">
+                <label class="control-label">Código: </label>
+                <p >{{alunoCtrl.aluno.login}} </p>
+            </div>
+        </div>
+
+
+         <div class="row" ng-show="alunoCtrl.aluno">
+            <div class="col-md-6">
+                <label class="control-label">Total de aulas realizadas: </label>
+                <p >{{alunoCtrl.aulas.totalAulas}} </p>
+            </div>
+            <div class="col-md-6" ng-show="alunoCtrl.dash.desempenhoGeral">
+                <label class="control-label">Desemplenho geral: </label>
+                <p >{{alunoCtrl.dash.desempenhoGeral}} %</p>
+            </div>
+
+
+        </div>
+
+
+        <div class="row" >
+            <div class="col-md-6" ng-show="alunoCtrl.graficoMediaPorExercicio">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Desempenho por exercício</div>
+                    <div class="panel-body">
+                       <canvas id="bar" class="chart chart-bar"
+                          chart-data="alunoCtrl.graficoMediaPorExercicio.data" chart-labels="alunoCtrl.graficoMediaPorExercicio.labels" chart-series="alunoCtrl.graficoMediaPorExercicio.series" >
+                        </canvas>
+                    </div>
+                  </div>
+
+            </div>
+
+             <div class="col-md-6" ng-show="alunoCtrl.graficoMediaPorAula">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Desempenho por aula</div>
+                    <div class="panel-body">
+                       <canvas id="bar" class="chart chart-bar"
+                          chart-data="alunoCtrl.graficoMediaPorAula.data" chart-labels="alunoCtrl.graficoMediaPorAula.labels" chart-series="alunoCtrl.graficoMediaPorAula.series" >
+                        </canvas>
+                    </div>
+                  </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="row" >
+            <div class="col-md-6" ng-show="alunoCtrl.graficoPeriodoAulas">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Aula por período</div>
+                    <div class="panel-body">
+                       <canvas id="pie" class="chart chart-pie"
+                          chart-data="alunoCtrl.graficoPeriodoAulas.data" chart-labels="alunoCtrl.graficoPeriodoAulas.labels" chart-series="alunoCtrl.graficoPeriodoAulas.series" >
+                        </canvas>
+                    </div>
+                  </div>
+            </div>
+
+        </div>
+
+
+  </div>
+
+
+</div>
