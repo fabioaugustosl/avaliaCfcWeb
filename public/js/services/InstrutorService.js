@@ -2,7 +2,7 @@
 apoioApp.factory('instrutorService', function($http, $log){
 	
 	var urlPadrao = 'http://localhost:3000'; //'http://ec2-52-11-115-221.us-west-2.compute.amazonaws.com:81'
-	//var urlPadrao = 'http://ec2-35-160-247-116.us-west-2.compute.amazonaws.com:84';
+	var urlPadrao = 'http://ec2-35-160-247-116.us-west-2.compute.amazonaws.com:8001';
 
 	var urlInstrutor = urlPadrao+'/api/avaliador/v1/';
 	
