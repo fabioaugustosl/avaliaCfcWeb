@@ -1,0 +1,75 @@
+        
+        <style type="text/css">
+            
+            #tabelaPrecos .row div{ min-height: 50px; vertical-align: middle; padding : 5px; border: 1px solid #c3c3c3;  }
+
+            .semBorda{ border: 0px!important; }
+
+        </style>
+
+
+        <div class="row" ng-controller="ContatoController">
+       
+            <div class="col-md-12">
+                <h1>Contato</h1>
+                <p>Caso tenha alguma dúvida ou sugestão basta enviar uma mensagem para nós.</p>
+            </div>
+        </div>
+
+        <hr>
+
+        <form id="msgForm" class="hidden-sm hidden-xs" ng-submit="contatoCtrl.enviar()"  ng-controller="ContatoController as contatoCtrl" >
+
+        <div class="row">
+            <div class="alert alert-success" style="margin: 10px;" role="alert" ng-show="contatoCtrl.msg">{{contatoCtrl.msg}}</div>
+            <div class="alert alert-danger" style="margin: 10px;" role="alert" ng-show="contatoCtrl.msgErro">{{contatoCtrl.msgErro}}</div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-1">
+               
+            </div>
+            <!-- /.col-md-4 -->
+            <div id="formEnviarMsgContato" class="col-md-10" >
+               
+                <div class="row">
+                    <div class="col-md-12">
+                        <label for="inputName" class="control-label">Nome: </label>
+                        <input id="inputName" type="text" placeholder="" class="form-control" ng-model="contatoCtrl.nome"  />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <label for="inputEmail" class="control-label">Email: </label>
+                        <input id="inputEmail" type="text" placeholder="" class="form-control" ng-model="contatoCtrl.email"  />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <label for="inputTelefone" class="control-label">Telefone: </label>
+                        <input id="inputTelefone" type="text" placeholder="" class="form-control" ng-model="contatoCtrl.telefone"  />
+                    </div>
+                </div>
+            
+                <div class="row">
+                    <div class="col-md-12">
+                        <label for="inputMsg" class="control-label">Mensagem: </label>
+                        <textarea id="inputMsg" type="text" placeholder="" class="form-control" ng-model="contatoCtrl.mensagem"  ></textarea>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12" style="padding:10px;">
+                         <button type="submit" class="btn btn-primary" >Enviar</button>
+                    </div>
+                </div>
+            </div>
+            <!-- /.col-md-4 -->
+            <div class="col-md-1">
+               
+            </div>
+        </div>
+        </form>
+    </div>

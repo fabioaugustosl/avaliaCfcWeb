@@ -8,6 +8,10 @@ var apoioApp = angular.module('apoioApp', ['ngRoute', "ngStorage", "cgNotify", "
 						  .when('/cadAluno', {templateUrl:'/view/cadastroAluno.html', controller: 'AlunoController'})
 						  .when('/minhaConta', {templateUrl:'/view/minhaConta.html', controller: 'CfcController'})
 						  .when('/pesquisarAluno', {templateUrl:'/view/pesquisarAluno.html', controller: 'AlunoPesquisarController'})
+
+						  .when('/precos', {templateUrl:'/view/preco.html', controller: 'PrincipalController'})
+						  .when('/contato', {templateUrl:'/view/contato.html', controller: 'ContatoController'})
+
 						  //.when('/acompanhar', {template:'/view/acompanhar.html', controller: 'GraficoController'})
 						 // .when('/chamados', {templateUrl:'/view/chamados.html', controller: 'ChamadosController'})
 						  .otherwise({redirectTo:'/index'});

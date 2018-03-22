@@ -103,6 +103,15 @@ apoioApp.controller('PrincipalController',
 			$location.url('/pesquisarAluno');
 		};
 
+		$scope.irParaPreco = function(){
+			$location.replace();
+			$location.url('/precos');
+		};
+
+		$scope.irParaContato = function(){
+			$location.replace();
+			$location.url('/contato');
+		};
 	}
 );
 
