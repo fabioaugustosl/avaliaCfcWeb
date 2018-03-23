@@ -11,6 +11,7 @@ var apoioApp = angular.module('apoioApp', ['ngRoute', "ngStorage", "cgNotify", "
 
 						  .when('/precos', {templateUrl:'/view/preco.html', controller: 'PrincipalController'})
 						  .when('/contato', {templateUrl:'/view/contato.html', controller: 'ContatoController'})
+						  .when('/funcionamento', {templateUrl:'/view/funcionamento.html', controller: 'PrincipalController'})
 
 						  //.when('/acompanhar', {template:'/view/acompanhar.html', controller: 'GraficoController'})
 						 // .when('/chamados', {templateUrl:'/view/chamados.html', controller: 'ChamadosController'})

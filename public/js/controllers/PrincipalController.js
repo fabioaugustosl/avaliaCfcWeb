@@ -112,6 +112,11 @@ apoioApp.controller('PrincipalController',
 			$location.replace();
 			$location.url('/contato');
 		};
+
+		$scope.irParaFuncionamento = function(){
+			$location.replace();
+			$location.url('/funcionamento');
+		};
 	}
 );
 
