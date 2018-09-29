@@ -1,6 +1,6 @@
 
 apoioApp.controller('AlunoController', 
-	function ($scope, $rootScope, $routeParams, $sessionStorage, notify, alunoService){
+	function ($scope, $rootScope, $routeParams,$location, $sessionStorage, notify, alunoService){
 		
 		console.log("chegou no controller de aluno");
 		var alunoCtrl = this;
@@ -9,6 +9,7 @@ apoioApp.controller('AlunoController',
 
 
 		alunoCtrl.processando = false;
+		alunoCtrl.modoEdicao = false;
 
 		alunoCtrl.alunos = [];
 		alunoCtrl.aluno = {};
@@ -39,10 +40,20 @@ apoioApp.controller('AlunoController',
 			alunoCtrl.aluno.cfc = alunoCtrl.cfc._id;
 			alunoCtrl.aluno.categoria = 'B';
 		};
-		novoaluno();
+		
+		alunoCtrl.editar = function(a){
+			console.log('editar ', a);
+			alunoCtrl.modoEdicao = true;
+			alunoCtrl.aluno = a;
+		};
 
+		alunoCtrl.cancelarEditar = function(){
+			alunoCtrl.modoEdicao = false;
+			alunoCtrl.aluno = {};
+			notificarSucesso("Edição cancelada!");
+		};
 
-
+		
 		var callbackRemover = function(){
 			console.log("callback remover aluno ", alunoCtrl.alunoSelecionado);
 			
@@ -73,7 +84,13 @@ apoioApp.controller('AlunoController',
 			alunoService.remover(i._id, callbackRemover, callbackRemoverErro);		
 		};
 
+		alunoCtrl.verDesempenho = function(i){
+			console.log('verDesempenho ', i);
 
+			$location.replace();
+			console.log('link chamado '+'/dashboardAluno/'+i._id);
+			$location.url('/dashboardAluno/'+i._id);
+		};
 	        	
 		var callbackSalvar = function(resultado){
 			console.log("call back salvar", resultado);
@@ -138,6 +155,11 @@ apoioApp.controller('AlunoController',
 			alunoCtrl.getAlunos(p);
 		};
 
+
+
+		//INIT
+		
+		novoaluno();
 
 		console.log('PROCESSANDO: ',alunoCtrl.processando);
 		if(!alunoCtrl.processando){

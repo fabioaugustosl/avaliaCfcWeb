@@ -17,8 +17,9 @@
 
     <!-- inject:css -->
     <link rel="stylesheet" href="/css/small-business.css">
+    <link rel="stylesheet" href="/css/telaInicial.css">
+    <link rel="stylesheet" href="/css/telasCadastro.css">
     <!-- endinject -->
-
 
 </head>
 <body>
@@ -42,12 +43,19 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" ng-hide="modoLogin">
                 <ul class="nav navbar-nav">
                     <li class="nav-item active">
-                      <a class="nav-link" href="#" ng-click="irParaPrincipal()">Home
+                      <a class="nav-link" href="#" ng-click="irParaPrincipal()" ng-show="!usuarioLogado">Home
                         <span class="sr-only">(current)</span>
                       </a>
                     </li>
+                    <li class="nav-item active" ng-show="usuarioLogado">
+                      <a class="nav-link" href="#" ng-click="irParaDashboard()">Principal</a>
+                    </li>
+
                     <li class="nav-item" ng-show="usuarioLogado">
                       <a class="nav-link" href="#" ng-click="irParaMinhaConta()">Minhas conta</a>
+                    </li>
+                    <li class="nav-item" ng-show="usuarioLogado">
+                      <a class="nav-link" href="#" ng-click="irParaVeiculos()">Veículos</a>
                     </li>
                     <li class="nav-item" ng-show="usuarioLogado">
                       <a class="nav-link" href="#" ng-click="irParaInstrutores()" >Instrutores</a>
@@ -68,13 +76,13 @@
             </div>
 
             <!-- login -->
-            <div ng-show="modoLogin" class="right">
+            <div ng-show="modoLogin" class="right container_login">
                 <div>{{msg}}</div>
                 <label for="inputName" class="control-label">Email:</label>
                 <input id="inputName" type="text" placeholder="" class="form-control" ng-model="email"  />
-                <label for="inputSenha" class="control-label">Email:</label>
+                <label for="inputSenha" class="control-label">Senha:</label>
                 <input id="inputSenha" type="password" placeholder="" class="form-control" ng-model="senha"  />
-                <button type="button" class="btn" ng-click="efetuarLogin()" >Salvar</button>
+                <button type="button" class="btn" ng-click="efetuarLogin()" >Entrar</button>
                 <button type="button" class="btn" ng-click="cancelarModoLogin()" >Cancelar</button>
             </div>
             <!-- /.navbar-collapse -->
@@ -95,7 +103,7 @@
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <p>Copyright &copy; Your Website 2014</p>
+                    <p>Copyright &copy; Virtz 2018</p>
                 </div>
             </div>
         </footer>
@@ -128,10 +136,12 @@
     <script src="/js/services/AlunoService.js"></script>
     <script src="/js/services/AulaService.js"></script>
     <script src="/js/services/CfcService.js"></script>
+    <script src="/js/services/DashboardCfcService.js"></script>
     <script src="/js/services/DashboardService.js"></script>
     <script src="/js/services/InstrutorService.js"></script>
     <script src="/js/services/LoginService.js"></script>
     <script src="/js/services/SessaoService.js"></script>
+    <script src="/js/services/VeiculoService.js"></script>
     <script src="/js/controllers/AlunoController.js"></script>
     <script src="/js/controllers/AlunoPesquisarController.js"></script>
     <script src="/js/controllers/CategoriaController.js"></script>
@@ -142,6 +152,7 @@
     <script src="/js/controllers/MenuController.js"></script>
     <script src="/js/controllers/NovaCfcController.js"></script>
     <script src="/js/controllers/PrincipalController.js"></script>
+    <script src="/js/controllers/VeiculoController.js"></script>
     <!-- endinject -->
 
 

@@ -106,6 +106,7 @@ apoioApp.controller('CfcController',
 		};
 
 		cfcCtrl.salvarFalta = function(){
+			console.log('cfcCtrl.faltaNovo : ',cfcCtrl.faltaNovo);
  			if(cfcCtrl.faltaNovo.nome && cfcCtrl.faltaNovo.categoria){
  				cfcCtrl.cfc.faltas.push(cfcCtrl.faltaNovo);	
  				cfcCtrl.faltaNovo = {};

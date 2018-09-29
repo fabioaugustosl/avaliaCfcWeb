@@ -1,0 +1,77 @@
+
+
+<div id="contentPrincipal" class="content" ng-controller="DashboardController as dashboardCtrl" >
+    
+        
+    <br /><br />
+    <div class="alert alert-success" role="alert">
+	  <h4 class="alert-heading">Bem vindo!</h4>
+	  <p>Olá {{dashboardCtrl.cfc.nome}}. Esse é um dashboard que vai ter ajudar a monitar sua CFC em tempo real.</p>
+	  
+	</div>
+    
+    <div class="container-fluid">
+
+    	<div class="container" style="max-width: 35%; float: left">
+    	
+    	<div class="card" style="border: 1px solid #E6E6E6; padding: 5px;">
+			<h2>Status instrutores</h2>
+			
+			<div class="card-body">
+			    
+				<table class="table table-striped table-dark">
+				  <thead>
+				    <tr>
+				      <th scope="col">Instrutor</th>
+				      <th scope="col">Em aula</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				    <tr ng-repeat="instrutor in dashboardCtrl.instrutores | orderBy : 'nome':true">
+				      <td scope="row">{{instrutor.nome}}</td>
+				      <td style="text-align: center;">
+				      		<img src="./img/ico_em_aula.png" title="Instrutor em aula" alt="Instrutor em aula" ng-show="instrutor.emAula" />
+				      		<img src="./img/ico_em_aula.png" title="Instrutor não está em aula" alt="Instrutor não está em aula" ng-hide="instrutor.emAula" />
+				      </td>
+				    </tr>
+				  </tbody>
+				</table>    
+
+			  </div>
+			</div>
+		</div>
+
+		<div class="container" style="max-width: 65%; float: left">
+			<div class="row">
+				<button type="button" class="btn btn-primary">
+				  Total de aulas hoje <span class="badge badge-light">{{dashboardCtrl.totalAulasDoDia}}</span>
+				</button>
+
+				<button type="button" class="btn btn-primary">
+				  Total de KM rodados hoje <span class="badge badge-light">{{dashboardCtrl.totalKmDoDia}}</span>
+				</button>
+		    </div>
+		  	
+		  	<div class="row">
+    			<div class="col-md-6 col-sm-6">
+    				<h4>Total de aulas de hoje por instrutor</h4>
+    				<canvas id="pie" class="chart chart-pie" ng-show="dashboardCtrl.totalAulasDoDia > 0"
+					  	chart-data="dashboardCtrl.graficoAulasInstrutorDoDia.data" chart-labels="dashboardCtrl.graficoAulasInstrutorDoDia.labels" chart-options="dashboardCtrl.graficoAulasInstrutorDoDia.options" style="max-width: 400px;">
+					</canvas> 
+    			</div>
+
+    			<div class="col-md-6 col-sm-6">
+    				<h4>Total de KM rodados hoje por instrutor</h4>
+    				<canvas id="pie" class="chart chart-pie" ng-show="dashboardCtrl.totalKmDoDia > 0"
+					  	chart-data="dashboardCtrl.graficoKmInstrutorDoDia.data" chart-labels="dashboardCtrl.graficoKmInstrutorDoDia.labels" chart-options="dashboardCtrl.graficoKMInstrutorDoDia.options" style="max-width: 400px;">
+					</canvas> 
+    			</div>
+  			</div>
+		  	
+		</div>
+
+
+
+    </div>
+</div>
+

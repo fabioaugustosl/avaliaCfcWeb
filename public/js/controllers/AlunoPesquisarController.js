@@ -5,7 +5,10 @@ apoioApp.controller('AlunoPesquisarController',
 		console.log("chegou no controller de aluno pesquisar");
 		var alunoCtrl = this;
 
-		$scope.$emit("tituloPagina", "Cadastro de alunos");
+		var idAluno = $routeParams.idAluno;
+		console.log("  >>> id ALUNO ", idAluno);
+
+		$scope.$emit("tituloPagina", "Desempenho do aluno");
 
 
 		alunoCtrl.processando = false;
@@ -170,6 +173,12 @@ apoioApp.controller('AlunoPesquisarController',
 		};
 
 
+		alunoCtrl.voltarTelaAluno = function(){
+			$location.replace();
+			$location.url('/cadAluno');
+		};
+
+
 		alunoCtrl.buscarAluno = function(){
 			alunoCtrl.aulas = {};
 
@@ -177,6 +186,15 @@ apoioApp.controller('AlunoPesquisarController',
 			alunoCtrl.processando = true;
 			alunoService.listar("?login="+alunoCtrl.codigoAlunoInformado, callbackListar, callbackListarErro);		
 		};
+
+
+
+		if(idAluno){
+			alunoCtrl.pesquisaAtiva = false;
+			alunoCtrl.codigoAlunoInformado = idAluno;
+		} else {
+			alunoCtrl.pesquisaAtiva = true;
+		}
 
 
 	              

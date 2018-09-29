@@ -1,6 +1,6 @@
 
 apoioApp.controller('PrincipalController',
-	function ($scope, $rootScope, $routeParams, $location, $sessionStorage, cfcService){
+	function ($scope, $rootScope, $routeParams, $location, $sessionStorage, notify, cfcService){
 		$scope.tituloPagina = "PRINCIPAL";
 
 		console.log('principal controller');
@@ -53,7 +53,10 @@ apoioApp.controller('PrincipalController',
 				$scope.$emit("usuarioLogado", $scope.usuarioLogado);
 				console.log($scope.usuarioLogado);
 
+				notify({ message: "Bem-vindo!", classes: 'alert-success', position: 'right', duration: 3000 });
+
 				$scope.cancelarModoLogin();
+				$scope.irParaDashboard();
 			}
 			
 		};
@@ -80,7 +83,17 @@ apoioApp.controller('PrincipalController',
 
 		$scope.irParaPrincipal = function(){
 			$location.replace();
+			$location.url('/index');
+		};
+
+		$scope.irParaDashboard = function(){
+			$location.replace();
 			$location.url('/dashboard');
+		};
+
+		$scope.irParaVeiculos = function(){
+			$location.replace();
+			$location.url('/veiculos');
 		};
 
 		$scope.irParaInstrutores = function(){

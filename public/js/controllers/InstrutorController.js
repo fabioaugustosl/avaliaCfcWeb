@@ -9,6 +9,7 @@ apoioApp.controller('InstrutorController',
 
 
 		instrutorCtrl.processando = false;
+		instrutorCtrl.modoEdicao = false;
 
 		instrutorCtrl.instrutores = [];
 		instrutorCtrl.instrutor = {};
@@ -36,9 +37,21 @@ apoioApp.controller('InstrutorController',
 			console.log('cfc selecionado : ',instrutorCtrl.cfc);
 			instrutorCtrl.instrutor.cfc = instrutorCtrl.cfc._id;
 		};
-		novoInstrutor();
 
 
+		instrutorCtrl.editar = function(instrutor){
+			console.log('editar ', instrutor);
+			instrutorCtrl.modoEdicao = true;
+			instrutorCtrl.instrutor = instrutor;
+		};
+
+		instrutorCtrl.cancelarEditar = function(){
+			instrutorCtrl.modoEdicao = false;
+			instrutorCtrl.instrutor = {};
+			notificarSucesso("Edição cancelada!");
+		};
+
+		
 
 		var callbackRemover = function(){
 			console.log("callback remover instrutor ", instrutorCtrl.instrutorSelecionado);
@@ -141,6 +154,8 @@ apoioApp.controller('InstrutorController',
 			//paCtrl.getEmpresas();
 			instrutorCtrl.pesquisar();
 		}
+
+		novoInstrutor();
 		
 		
 

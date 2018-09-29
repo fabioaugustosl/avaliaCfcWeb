@@ -16,7 +16,7 @@
     <form id="alunoForm" class="hidden-sm hidden-xs" ng-submit="alunoCtrl.salvar()" >
 
         <div class="panel">
-            <div class="panel-heading">Cadastro de alunos</div>
+            <h2>Cadastro de alunos</h2>
         </div>
 
         <div class="row">
@@ -75,6 +75,7 @@
             <!--button type="button" class="btn btn-primary" ng-click="alunoCtrl.cancelarEdicao()" ng-show="alunoCtrl.editando">Cancelar</button-->
 
             <button type="submit" class="btn btn-primary" >Salvar</button>
+            <button type="button" class="btn btn-danger" ng-click="alunoCtrl.cancelarEditar()" ng-show="alunoCtrl.modoEdicao" >Cancelar</button>
         </div>
                 
     </form>
@@ -100,9 +101,12 @@
                 <td>{{pessoa.email}}</td>  
                 <td>{{pessoa.celular}} </td>
                 <td>
-                   <button type="submit" class="btn btn-success" ng-click="alunoCtrl.remover(pessoa)" style="margin-top: 5px;" >Remover</button>
+                   <button type="button" class="btn btn-success" ng-click="alunoCtrl.editar(pessoa)" style="margin-top: 5px;" >Editar</button>
 
-                   <button type="submit" class="btn btn-success" ng-click="alunoCtrl.remover(pessoa)" style="margin-top: 5px;" >Ver desempenho</button>
+                   <button type="button" class="btn btn-success" ng-confirm-click="Tem certeza que deseja excluir o aluno {{pessoa.nome}}?" confirmed-click="alunoCtrl.remover(pessoa)" style="margin-top: 5px;" >Remover</button>
+
+
+                   <button type="button" class="btn btn-success" ng-click="alunoCtrl.verDesempenho(pessoa)" style="margin-top: 5px;" >Ver desempenho</button>
 
 
                </td>

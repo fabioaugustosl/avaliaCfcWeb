@@ -14,7 +14,7 @@
 
     
     <div class="content" ng-show="alunoCtrl.aluno">
-        <div class="row">
+        <div class="row" ng-show="alunoCtrl.pesquisaAtiva">
             <div class="col-md-6">
                 <label class="control-label">Insira o código do aluno: </label>
                 <div class="input-icon right">
@@ -43,7 +43,7 @@
         </div>
 
 
-         <div class="row" ng-show="alunoCtrl.aluno">
+        <div class="row" ng-show="alunoCtrl.aluno">
             <div class="col-md-6">
                 <label class="control-label">Total de aulas realizadas: </label>
                 <p >{{alunoCtrl.aulas.totalAulas}} </p>
@@ -52,8 +52,6 @@
                 <label class="control-label">Desemplenho geral: </label>
                 <p >{{alunoCtrl.dash.desempenhoGeral}} %</p>
             </div>
-
-
         </div>
 
 
@@ -100,7 +98,13 @@
         </div>
 
 
-  </div>
 
+        <div class="row" >
+            <div class="col-md-12" ng-hide="alunoCtrl.pesquisaAtiva" >
+                <button type="button" class="btn btn-success" ng-click="alunoCtrl.voltarTelaAluno()" style="margin-top: 5px;" >Voltar</button>
+            </div>
+        </div>
+
+  </div>
 
 </div>

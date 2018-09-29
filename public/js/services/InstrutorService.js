@@ -1,8 +1,8 @@
 
 apoioApp.factory('instrutorService', function($http, $log){
 	
-	//var urlPadrao = 'http://localhost:3000'; //'http://ec2-52-11-115-221.us-west-2.compute.amazonaws.com:81'
-	var urlPadrao = 'http://cfc.virtz.com.br:3000';
+	var urlPadrao = 'http://localhost:3000'; 
+	//var urlPadrao = 'http://cfc.virtz.com.br:3000';
 
 	var urlInstrutor = urlPadrao+'/api/avaliador/v1/';
 	
@@ -20,7 +20,7 @@ apoioApp.factory('instrutorService', function($http, $log){
 		$http.get(urlInstrutor+paramentro)
 			.then(
 				function(data){
-					console.log(data);
+					//console.log(data);
 					fcCallback(data.data);
 				},
 				function(data){

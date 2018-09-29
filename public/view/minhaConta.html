@@ -133,7 +133,7 @@
                             <td>{{exe.categoria}}</td> 
                             <td>{{exe.nome}}</td>
                             <td>
-                               <button type="submit" class="btn btn-success" ng-click="cfcCtrl.removerExercicio(exe)" style="margin-top: 5px;" >Remover</button>
+                               <button type="submit" class="btn btn-success" ng-confirm-click="Tem certeza que deseja excluir o exercício {{exe.nome}}?" confirmed-click="cfcCtrl.removerExercicio(exe)" style="margin-top: 5px;" >Remover</button>
 
                            </td>
                        </tr>
@@ -198,7 +198,7 @@
                             <td>{{exe.categoria}}</td> 
                             <td>{{exe.nome}}</td>
                             <td>
-                               <button type="submit" class="btn btn-success" ng-click="cfcCtrl.removerFalta(exe)" style="margin-top: 5px;" >Remover</button>
+                               <button type="submit" class="btn btn-success" ng-confirm-click="Tem certeza que deseja excluir a falta {{exe.nome}}?" confirmed-click="cfcCtrl.removerFalta(exe)" style="margin-top: 5px;" >Remover</button>
 
                            </td>
                        </tr>
