@@ -3,6 +3,16 @@ var jshint = require('gulp-jshint');
 var nodemon = require('gulp-nodemon');
 
 
+var useref = require('gulp-useref');
+var minifyCss = require('gulp-minify-css');
+var gulpif = require('gulp-if');
+var ngAnnotate = require('gulp-ng-annotate');
+var runSequence = require('run-sequence');
+var concat = require('gulp-concat');
+var rename = require('gulp-rename');
+var uglify = require('gulp-uglify');
+
+
 
 var jsFiles = ['*.js','public/js/**/*.js']; 
 
@@ -54,3 +64,31 @@ gulp.task('default', ['style','inject'], function(){
 					console.log('Restarting...');
 				});
 });
+
+
+
+// BUILD
+gulp.task('copy-files', function () {
+    var stream =  gulp.src('./public/**/*') // stream source
+        .pipe(gulp.dest('./dist')); // copy to dist/views
+    return stream;
+});
+
+
+gulp.task('copy-index', function () {
+	return gulp.src('./public/view/index.html')
+		.pipe(gulp.dest('./dist'));
+
+});
+
+
+
+gulp.task('build', function (callback) {
+    runSequence(
+    	'inject',
+        'copy-files',
+        'copy-index',
+        /* other tasks maybe */
+    callback);
+});
+

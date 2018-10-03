@@ -1,0 +1,52 @@
+<div class="content" ng-controller="PainelController as painelCtrl">
+
+
+    <div class="content" >
+
+        <div class="row">
+            
+            <div class="col-xs-6 col-md-4">
+                <div class="panel panel-warning">
+                   
+                    <div class="panel-body">
+                       
+                       <div class="panel panel-default" ng-repeat="ult in painelCtrl.historico | orderBy : '-dataChamado' | limitTo:10">
+                          <div class="panel-body">
+                            <p>{{ult.chave}} </p>
+                            <label >{{ult.pontoAtendimento.nome}}</label>
+                          </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            
+
+            <div class="col-xs-12 col-md-8">
+
+                <div class="panel panel-success" >
+                   
+                    <div class="panel-body" ng-show="senhaAtual">
+                    
+                        <div class="well well-lg" >
+                          <h1>{{senhaAtual.chave}} </h1>
+                          <p>{{senhaAtual.pontoAtendimento.nome}}</p>
+                          
+                        </div>
+
+                    </div>
+
+                    <button type="button" class="btn btn-primary" ng-click="painelCtrl.recuparSenhaAtual()" >Verificar</button>
+
+                </div>
+
+            </div>
+          
+        </div>
+
+    </div>
+                
+</div>
+
+      
