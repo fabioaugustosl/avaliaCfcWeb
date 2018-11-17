@@ -11,6 +11,11 @@ apoioApp.controller('CfcController',
 
 		cfcCtrl.cfc = $sessionStorage.usuarioLogado;
 		cfcCtrl.categorias = ['A', 'B', 'C', 'D', 'E'];
+		cfcCtrl.tipos = [];
+		cfcCtrl.tipos.push({sigla: 'E', nome:'Eliminatória'});
+		cfcCtrl.tipos.push({sigla: 'G', nome:'Grave'});
+		cfcCtrl.tipos.push({sigla: 'M', nome:'Média'});
+		cfcCtrl.tipos.push({sigla: 'L', nome:'Leve'});
 
 		cfcCtrl.msg = null;
 		cfcCtrl.msgErro = null;

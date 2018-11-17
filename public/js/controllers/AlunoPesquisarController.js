@@ -1,6 +1,6 @@
 
 apoioApp.controller('AlunoPesquisarController', 
-	function ($scope, $rootScope, $routeParams, $sessionStorage,$location, notify, moment, alunoService, aulaService, cfcService, dashboardService){
+	function ($scope, $rootScope, $routeParams, $sessionStorage,$location, notify, moment, alunoService, aulaService, cfcService, dashboardService, simuladoService){
 		
 		console.log("chegou no controller de aluno pesquisar");
 		var alunoCtrl = this;
@@ -22,6 +22,7 @@ apoioApp.controller('AlunoPesquisarController',
 
 		// relatorio aulas
 		alunoCtrl.aulas = {};
+		alunoCtrl.todasAulas = null ;
 		alunoCtrl.exercicios = [];
 		alunoCtrl.dash = {};
 		alunoCtrl.graficoMediaPorExercicio = null;
@@ -42,12 +43,15 @@ apoioApp.controller('AlunoPesquisarController',
 
 		//callback dash
 		var callbackRecuperarCfc =  function(cfcRetorno){
-			console.log(cfcRetorno);
+			console.log('callback da recuperação da cfc: ',cfcRetorno);
 			alunoCtrl.cfc  = cfcRetorno;
 			for(var f = 0; f < cfcRetorno.exercicios.length; f++){
 				var exe = cfcRetorno.exercicios[f];
 				alunoCtrl.exercicios[exe._id] = exe.nome;
 			}
+
+			console.log('VAI CHAMAR 2 DASHS ');
+
 			// dados graficos avaliações
 			dashboardService.listarMediaNotasPorExercicio(alunoCtrl.aluno.cfc, alunoCtrl.aluno.login, callbackListarDashExercicios);
 			dashboardService.listarMediaNotasPorAula(alunoCtrl.aluno.cfc, alunoCtrl.aluno.login, callbackListarDashAula);
@@ -68,7 +72,7 @@ apoioApp.controller('AlunoPesquisarController',
 				dados.push((d.nota * 100) / 5);
 			}
 			alunoCtrl.graficoMediaPorExercicio.data[0] = dados;
-			console.log(alunoCtrl.graficoMediaPorExercicio);
+			console.log('alunoCtrl.graficoMediaPorExercicio : ',alunoCtrl.graficoMediaPorExercicio);
 
 			// fazer uma media geral de desempenho
 			var totalDesempenho = 0;
@@ -82,43 +86,48 @@ apoioApp.controller('AlunoPesquisarController',
 		var callbackListarDashAula= function(resultado){
 			console.log("call back  callbackListarDashAula", resultado);
 
+			//DASH  1
 			//grafico media aproveitamento por aula
 			alunoCtrl.graficoMediaPorAula = {};
 			alunoCtrl.graficoMediaPorAula.labels = [];
 			alunoCtrl.graficoMediaPorAula.series = ['Aproveitamento em % '];
 			alunoCtrl.graficoMediaPorAula.data = [ ];
 
-			// grafico periodo das aulas
-			alunoCtrl.graficoPeriodoAulas = {};
-			alunoCtrl.graficoPeriodoAulas.labels = [];
-			alunoCtrl.graficoPeriodoAulas.data = [];
-
-			var periodoAula = [];
 			var dados = []; 
 			for(var i=0; i<resultado.length ;i++){
 				var d = resultado[i];
 				var aulaCompleta = alunoCtrl.aulas.aulas[d._id.aula];
 				console.log('aulaCompleta ::: ',aulaCompleta);
-
-				alunoCtrl.graficoMediaPorAula.labels.push(moment(aulaCompleta.data).format("DD/MM/YYYY"));
-				dados.push((d.nota * 100) / 5);
-
-				var p = periodoAula[aulaCompleta.periodo];
-				if(!p){ p = 0;}
-				p++;
-				periodoAula[aulaCompleta.periodo] = p;
+				if(aulaCompleta){
+					alunoCtrl.graficoMediaPorAula.labels.push(moment(aulaCompleta.data).format("DD/MM/YYYY"));
+					dados.push((d.nota * 100) / 5);
+				}
 			}
 
 			alunoCtrl.graficoMediaPorAula.data[0] = dados;
 			console.log('alunoCtrl.graficoMediaPorAula: ',alunoCtrl.graficoMediaPorAula);
 			
+			//DASH 2
+			// grafico periodo das aulas
+			alunoCtrl.graficoPeriodoAulas = {};
+			alunoCtrl.graficoPeriodoAulas.labels = [];
+			alunoCtrl.graficoPeriodoAulas.data = [];
+
+			console.log('vai agrupar as aulas por periodo ',alunoCtrl.aulas.aulas);
+			var periodoAula = [];
+			for(var i=0; i<alunoCtrl.todasAulas.length ;i++){
+				var a = alunoCtrl.todasAulas[i];
+				var p = periodoAula[a.periodo];
+				if(!p){ p = 0;}
+				p++;
+				periodoAula[a.periodo] = p;
+			}
 		
 			for (var key in periodoAula) {
 			  	alunoCtrl.graficoPeriodoAulas.labels.push(key);
 				alunoCtrl.graficoPeriodoAulas.data.push(periodoAula[key]);
 			}
-
-			
+			console.log('alunoCtrl.graficoPeriodoAulas : ',alunoCtrl.graficoPeriodoAulas);
 
 		};
 
@@ -127,20 +136,21 @@ apoioApp.controller('AlunoPesquisarController',
 		//callback recuperar aulas 
 		var callbackListarAulas = function(resultado){
 			console.log("call back listar aulas", resultado);
+			alunoCtrl.todasAulas = resultado;
 			alunoCtrl.aulas.totalAulas = 0;
 			if(resultado){
 				alunoCtrl.aulas.aulas = [];
 				for(var a =0; a < resultado.length; a++){
 					var aula = resultado[a];
-					console.log(aula);
+					//console.log(aula);
 					alunoCtrl.aulas.aulas[aula._id] = aula;	
 				}
-				console.log('aulas tratada ',alunoCtrl.aulas.aulas);
+				console.log('aulas tratadas: ',alunoCtrl.aulas.aulas);
 				 
 				alunoCtrl.aulas.totalAulas = resultado.length;
 			}
 			
-
+			console.log('Agora vai buscar a cfc do aluno ');
 			// recupera a cfc do aluno para depois buscar os dashboards.
 			cfcService.recuperarCfcPorId(alunoCtrl.aluno.cfc, callbackRecuperarCfc);
 
@@ -156,11 +166,15 @@ apoioApp.controller('AlunoPesquisarController',
 
 
 		var callbackListar = function(resultado){
-			console.log("call back listar", resultado);
+			console.log("call back listar aluno: ", resultado);
 			if(resultado && resultado.length > 0){
+				
+
 				alunoCtrl.aluno = resultado[0];	
 
-				console.log(alunoCtrl.aluno);
+				alunoCtrl.buscarSimulados(alunoCtrl.aluno._id);
+
+				console.log("agora vai buscar as aulas do aluno: ",alunoCtrl.aluno);
 				
 				// dados aulas 
 				// OBS: após recuperar as aulas ele busca as notas
@@ -169,8 +183,6 @@ apoioApp.controller('AlunoPesquisarController',
 			} else {
 				alunoCtrl.msgErro = 'Aluno não encontrado';
 			}
-
-			
 
 			alunoCtrl.processando  = false;
 		};
@@ -191,6 +203,21 @@ apoioApp.controller('AlunoPesquisarController',
 		};
 
 
+		
+		// SIMULADOS
+
+		var callbackSimulado = function(resultado){
+			console.log("callback buscar simulados: ", resultado);
+			alunoCtrl.simulados = resultado;
+		};
+
+
+		alunoCtrl.buscarSimulados  = function(aluno){
+			console.log('VAi buscar simulados');
+			simuladoService.listarTodosPorAluno(aluno, callbackSimulado);
+		};
+
+
 
 		if(idAluno){
 			alunoCtrl.pesquisaAtiva = false;
@@ -199,8 +226,6 @@ apoioApp.controller('AlunoPesquisarController',
 		} else {
 			alunoCtrl.pesquisaAtiva = true;
 		}
-
-
 	              
 
 	}

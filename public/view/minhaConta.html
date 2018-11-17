@@ -148,7 +148,7 @@
 
         <!-- FALTAS -->
         
-        <h2>Faltas que o aluno poderá cometer durante a aula</h2>
+        <h2>Faltas que o aluno poderá cometer durante a aula e nos simulados de exame</h2>
 
         <div class="row">
             <div class="col-md-12">
@@ -156,7 +156,7 @@
             </div>
         </div>
         <div class="row" ng-show="cfcCtrl.modoInserirFalta">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <label for="inputCategoriaFalta" class="control-label">Categoria: </label>
                 <div class="input-icon right">
 
@@ -167,12 +167,22 @@
                 </div>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-6">
+                <label for="inputTipoFalta" class="control-label">Tipo: </label>
+                <div class="input-icon right">
+                    <select name="inputTipoFalta" id="inputTipoFalta"  ng-model="cfcCtrl.faltaNovo.tipo">
+                        <option ng-repeat="tip in cfcCtrl.tipos" value="{{tip.sigla}}">{{tip.nome}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-12">
                 <label for="inputNomeFalta" class="control-label">Nome: </label>
                 <div class="input-icon right">
                     <input id="inputNomeFalta" type="text" placeholder="" class="form-control" ng-model="cfcCtrl.faltaNovo.nome" />
                 </div>
             </div>
+
 
             <div class="col-md-4">
                 <button type="button" class="btn btn-primary" ng-click="cfcCtrl.salvarFalta()" >Ok</button>
@@ -188,6 +198,7 @@
                        <tr> 
                            <th>Cateogia</th> 
                            <th>Nome</th> 
+                           <th>Tipo</th> 
                            <th>#</th>
                        </tr> 
                    </thead> 
@@ -197,6 +208,12 @@
                        <tr ng-repeat="exe in cfcCtrl.cfc.faltas | orderBy : 'nome':true"> 
                             <td>{{exe.categoria}}</td> 
                             <td>{{exe.nome}}</td>
+                            <td>
+                                <span ng-show="exe.tipo == 'E'" >Eliminatória</span> 
+                                <span ng-show="exe.tipo == 'G'" >Grave</span> 
+                                <span ng-show="exe.tipo == 'M'" >Média</span> 
+                                <span ng-show="exe.tipo == 'L'" >Leve</span> 
+                            </td>
                             <td>
                                <button type="submit" class="btn btn-success" ng-confirm-click="Tem certeza que deseja excluir a falta {{exe.nome}}?" confirmed-click="cfcCtrl.removerFalta(exe)" style="margin-top: 5px;" >Remover</button>
 

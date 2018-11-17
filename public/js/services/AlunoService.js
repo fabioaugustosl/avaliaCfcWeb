@@ -16,11 +16,11 @@ apoioApp.factory('alunoService', function($http, $log){
 			paramentro = parametros;
 		}
 
-		console.log('url:: ',urlAluno+paramentro);
+		//console.log('url:: ',urlAluno+paramentro);
 		$http.get(urlAluno+paramentro)
 			.then(
 				function(data){
-					console.log(data);
+					//console.log(data);
 					fcCallback(data.data);
 				},
 				function(data){
@@ -35,7 +35,7 @@ apoioApp.factory('alunoService', function($http, $log){
 		$http.get(urlAluno+id)
 			.then(
 				function(data){
-					console.log(data);
+					//console.log(data);
 					fcCallback(data.data);
 				},
 				function(data){

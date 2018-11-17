@@ -8,6 +8,7 @@ apoioApp.factory('dashboardService', function($http, $log){
 	
 
 	var listarMediaNotasPorExercicio = function(cfc, aluno, fcCallback){
+		console.log(" link : ",urlDashAluno+"listarMediaNotasPorExercicio/"+cfc+"/"+aluno);
 		$http.get(urlDashAluno+"listarMediaNotasPorExercicio/"+cfc+"/"+aluno)
 			.then(
 				function(data){
@@ -22,6 +23,7 @@ apoioApp.factory('dashboardService', function($http, $log){
 
 
 	var listarMediaNotasPorAula = function(cfc, aluno, fcCallback){
+		console.log(" link : ",urlDashAluno+"listarMediaNotasPorAula/"+cfc+"/"+aluno);
 		$http.get(urlDashAluno+"listarMediaNotasPorAula/"+cfc+"/"+aluno)
 			.then(
 				function(data){

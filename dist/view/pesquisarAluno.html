@@ -97,6 +97,45 @@
 
         </div>
 
+        <div class="row" >
+            <div class="col-md-6" ng-show="(alunoCtrl.pesquisaAtiva && alunoCtrl.simulados) || (!alunoCtrl.pesquisaAtiva)" >
+            <div class="panel panel-default">
+                <div class="panel-heading">Simulados realizados pelo aluno</div>
+                <div class="panel-body">
+                    <p ng-hide="alunoCtrl.simulados">Não foi realizado nenhum simulado de direção por esse aluno.</p>
+
+                    <table class="table table-striped table-dark" ng-show="alunoCtrl.simulados">
+                      <thead>
+                        <tr>
+                          <th scope="col">Data</th>
+                          <th scope="col">Situação</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="simulado in alunoCtrl.simulados | orderBy : 'data':true">
+                          <td scope="row">{{simulado.data | date:'dd/MM/yyyy'}}</td>
+                          <td style="text-align: center;">
+                                <span ng-show="simulado.pontos <= 3">
+                                    <p>APROVADO    </p>
+                                    <p>Pontos: -{{simulado.pontos}}    </p>
+                                </span>
+
+                                <span ng-show="simulado.pontos > 3">
+                                    <p>REPROVADO </p>
+                                    <p ng-show="simulado.pontos < 999">Pontos: -{{simulado.pontos}}    </p>
+                                    <p ng-show="simulado.pontos > 999">Cometeu falta eliminatória!    </p>
+                                </span>
+
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>  
+
+                </div>
+            </div>
+            </div>
+        </div>
+
 
 
         <div class="row" >

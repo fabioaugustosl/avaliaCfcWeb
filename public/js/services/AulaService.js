@@ -10,17 +10,17 @@ apoioApp.factory('aulaService', function($http, $log){
 
 	
 	var listar = function(parametros, fcCallback){
-		console.log('Entou no listar service aula ')
+		//console.log('Entou no listar service aula ')
 		var paramentro = "";
 		if(parametros){
 			paramentro = parametros;
 		}
 
-		console.log('url:: ',urlAula+paramentro);
+		//console.log('url:: ',urlAula+paramentro);
 		$http.get(urlAula+paramentro)
 			.then(
 				function(data){
-					console.log(data);
+					//console.log(data);
 					fcCallback(data.data);
 				},
 				function(data){
@@ -35,7 +35,7 @@ apoioApp.factory('aulaService', function($http, $log){
 		$http.get(urlAula+id)
 			.then(
 				function(data){
-					console.log(data);
+					//console.log(data);
 					fcCallback(data.data);
 				},
 				function(data){

@@ -14,7 +14,7 @@ apoioApp.factory('cfcService', function($http, $log){
 		$http.get(urlCfc)
 			.then(
 				function(data){
-					console.log(data);
+					//console.log(data);
 
 					fcCallback(data.data);
 				},
@@ -31,7 +31,7 @@ apoioApp.factory('cfcService', function($http, $log){
 		$http.get(urlCfc+id)
 			.then(
 				function(data){
-					console.log(data);
+					//console.log(data);
 
 					fcCallback(data.data);
 				},
