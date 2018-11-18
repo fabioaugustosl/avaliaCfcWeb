@@ -1,8 +1,8 @@
 
 apoioApp.factory('dashboardService', function($http, $log){
 	
-	var urlPadrao = 'http://localhost:3000'; //'http://ec2-52-11-115-221.us-west-2.compute.amazonaws.com:81'
-	//var urlPadrao = 'http://cfc.virtz.com.br:3000';
+	//var urlPadrao = 'http://localhost:3000'; //'http://ec2-52-11-115-221.us-west-2.compute.amazonaws.com:81'
+	var urlPadrao = 'http://cfc.virtz.com.br:3000';
 
 	var urlDashAluno = urlPadrao+'/api/dashAluno/v1/';
 	
