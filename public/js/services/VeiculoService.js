@@ -2,7 +2,7 @@
 apoioApp.factory('veiculoService', function($http, $log){
 	
 	//var urlPadrao = 'http://localhost:3000'; 
-	var urlPadrao = 'http://veiculo.virtz.com.br:3000';
+	var urlPadrao = 'http://cfc.virtz.com.br:3000';
 
 	var urlVeiculo = urlPadrao+'/api/veiculo/v1/';
 	
